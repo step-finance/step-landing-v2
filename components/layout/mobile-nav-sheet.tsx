@@ -9,9 +9,10 @@ import { cn } from "@/lib/utils";
 
 type MobileNavSheetProps = {
   items: { href: string; label: string }[];
+  primaryCtaHref: string;
 };
 
-export function MobileNavSheet({ items }: MobileNavSheetProps) {
+export function MobileNavSheet({ items, primaryCtaHref }: MobileNavSheetProps) {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -76,7 +77,7 @@ export function MobileNavSheet({ items }: MobileNavSheetProps) {
             </Link>
           ))}
         </nav>
-        <ButtonLink href="/validator" className="mt-5 w-full">
+        <ButtonLink href={primaryCtaHref} external className="mt-5 w-full">
           Delegate to Step
         </ButtonLink>
       </div>

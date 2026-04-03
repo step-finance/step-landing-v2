@@ -1,14 +1,13 @@
 export const siteConfig = {
   name: "Step Validator",
   description:
-    "Premium validator infrastructure for Solana with live public metrics, transparent operations, and a clean path to non-custodial staking.",
+    "Step validator on Solana with public data and delegation links.",
   domain: process.env.NEXT_PUBLIC_SITE_URL ?? "https://step.finance",
   network: "Solana Mainnet",
   nav: [
-    { href: "/", label: "Home" },
-    { href: "/validator", label: "Validator" },
-    { href: "/metrics", label: "Metrics" },
-    { href: "/about", label: "About" }
+    { href: "/#top", label: "Home" },
+    { href: "/contributions", label: "Contributions" },
+    { href: "/#faq", label: "FAQ" }
   ],
   socials: [
     { href: "https://x.com/stepfinance_", label: "X" },

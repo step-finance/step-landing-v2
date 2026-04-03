@@ -19,7 +19,7 @@ export function PageSection({
     <section
       id={id}
       className={cn(
-        "section-shell px-4 py-10 sm:px-6 sm:py-12 lg:px-8 lg:py-14",
+        "section-shell px-4 py-8 sm:px-6 sm:py-10 lg:px-8 lg:py-12",
         tone === "frame" && "grid-frame",
         className
       )}
@@ -28,7 +28,7 @@ export function PageSection({
         className={cn(
           "mx-auto max-w-[1400px]",
           tone === "elevated" &&
-            "rounded-[36px] border border-line bg-canvas-elevated/55 p-6 shadow-panel sm:p-7 lg:p-9"
+            "rounded-[34px] border border-white/[0.07] bg-canvas-elevated/48 p-5 shadow-panel sm:p-6 lg:p-8"
         )}
       >
         {children}

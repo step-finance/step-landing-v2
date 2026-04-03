@@ -24,8 +24,8 @@ const config: Config = {
       },
       boxShadow: {
         panel:
-          "0 0 0 1px rgba(155, 168, 188, 0.12), 0 12px 40px rgba(0, 0, 0, 0.32)",
-        glow: "0 0 0 1px rgba(0, 248, 183, 0.18), 0 24px 80px rgba(0, 248, 183, 0.14)"
+          "0 0 0 1px rgba(255, 255, 255, 0.06), 0 14px 34px rgba(0, 0, 0, 0.24)",
+        glow: "0 0 0 1px rgba(0, 248, 183, 0.12), 0 18px 48px rgba(0, 248, 183, 0.08)"
       },
       fontFamily: {
         display: ["Space Grotesk", "Avenir Next", "Segoe UI", "sans-serif"],

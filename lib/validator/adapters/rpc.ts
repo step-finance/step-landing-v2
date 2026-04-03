@@ -1,3 +1,5 @@
+import { getPublicRpcUrl, getValidatorConfig } from "@/lib/validator/config";
+import { formatDurationApprox } from "@/lib/utils";
 import type { RpcValidatorData } from "@/lib/validator/schema";
 
 type RpcResponse<T> = {
@@ -20,12 +22,22 @@ type VoteAccountsResult = {
   delinquent: RpcVoteAccount[];
 };
 
-async function rpcRequest<T>(method: string, params: unknown[] = []) {
-  const rpcUrl = process.env.SOLANA_RPC_URL;
+type RpcEpochInfo = {
+  epoch: number;
+  absoluteSlot: number;
+};
 
-  if (!rpcUrl) {
-    return null;
-  }
+type RpcEpochSchedule = {
+  slotsPerEpoch: number;
+};
+
+type RpcPerformanceSample = {
+  numSlots: number;
+  samplePeriodSecs: number;
+};
+
+async function rpcRequest<T>(method: string, params: unknown[] = []) {
+  const rpcUrl = getPublicRpcUrl();
 
   const response = await fetch(rpcUrl, {
     method: "POST",
@@ -53,23 +65,16 @@ async function rpcRequest<T>(method: string, params: unknown[] = []) {
 }
 
 export async function getRpcValidatorData(): Promise<RpcValidatorData | null> {
-  if (!process.env.SOLANA_RPC_URL) {
-    return null;
-  }
+  const { voteAccount, identityPubkey, firstStakeEpoch, mevCommission } = getValidatorConfig();
 
-  const voteAccount = process.env.STEP_VOTE_ACCOUNT;
-  const identityPubkey = process.env.STEP_IDENTITY_PUBKEY;
-
-  if (!voteAccount && !identityPubkey) {
-    return null;
-  }
-
-  const [voteAccounts, currentSlot] = await Promise.all([
+  const [voteAccounts, epochInfo, epochSchedule, performanceSamples] = await Promise.all([
     rpcRequest<VoteAccountsResult>("getVoteAccounts"),
-    rpcRequest<number>("getSlot")
+    rpcRequest<RpcEpochInfo>("getEpochInfo"),
+    rpcRequest<RpcEpochSchedule>("getEpochSchedule"),
+    rpcRequest<RpcPerformanceSample[]>("getRecentPerformanceSamples", [1])
   ]);
 
-  if (!voteAccounts || typeof currentSlot !== "number") {
+  if (!voteAccounts || typeof epochInfo?.absoluteSlot !== "number" || typeof epochInfo?.epoch !== "number") {
     return null;
   }
 
@@ -86,15 +91,29 @@ export async function getRpcValidatorData(): Promise<RpcValidatorData | null> {
   }
 
   const blockTime = await rpcRequest<number | null>("getBlockTime", [validator.lastVote]);
-  const distance = Math.max(0, currentSlot - validator.lastVote);
+  const distance = Math.max(0, epochInfo.absoluteSlot - validator.lastVote);
   const health = distance <= 150 ? "healthy" : distance <= 400 ? "degraded" : "stale";
-  const uptime = health === "healthy" ? 99.98 : health === "degraded" ? 99.7 : 98.9;
+  const ageEpochs = Math.max(1, epochInfo.epoch - firstStakeEpoch + 1);
+  const sample = performanceSamples?.[0];
+  const secondsPerSlot =
+    sample && sample.numSlots > 0 ? sample.samplePeriodSecs / sample.numSlots : null;
+  const epochDurationSeconds =
+    secondsPerSlot && typeof epochSchedule?.slotsPerEpoch === "number"
+      ? epochSchedule.slotsPerEpoch * secondsPerSlot
+      : null;
+  const ageHuman =
+    epochDurationSeconds
+      ? formatDurationApprox(ageEpochs * epochDurationSeconds)
+      : null;
 
   return {
     commission: validator.commission,
+    mevCommission,
     activatedStakeSol: validator.activatedStake / 1_000_000_000,
     stakeRank: allAccounts.findIndex((account) => account.votePubkey === validator.votePubkey) + 1,
-    uptime,
+    ageEpochs,
+    ageHuman,
+    epochDurationSeconds,
     health,
     lastVoteSlot: validator.lastVote,
     lastVoteAt: new Date(((blockTime ?? Math.floor(Date.now() / 1000)) as number) * 1000).toISOString(),

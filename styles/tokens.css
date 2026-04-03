@@ -10,6 +10,6 @@
   --color-cyan: 17 138 178;
   --color-amber: 255 187 29;
   --color-orange: 243 114 44;
-  --gradient-a: radial-gradient(circle at top right, rgba(0, 248, 183, 0.18), transparent 40%);
-  --gradient-b: radial-gradient(circle at left center, rgba(17, 138, 178, 0.14), transparent 42%);
+  --gradient-a: radial-gradient(circle at 84% 10%, rgba(0, 248, 183, 0.1), transparent 34%);
+  --gradient-b: radial-gradient(circle at 8% 22%, rgba(17, 138, 178, 0.09), transparent 36%);
 }

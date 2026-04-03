@@ -12,7 +12,7 @@ body {
   background:
     var(--gradient-a),
     var(--gradient-b),
-    linear-gradient(180deg, #04070c 0%, #060b12 28%, #08101a 100%);
+    linear-gradient(180deg, #04070c 0%, #050a11 24%, #09111b 100%);
   color: rgb(var(--color-ink));
   font-family: Manrope, "Avenir Next", "Segoe UI", sans-serif;
   min-height: 100vh;
@@ -57,22 +57,22 @@ body {
 
 @layer components {
   .panel {
-    @apply rounded-[28px] border border-line/80 bg-canvas-elevated/80 shadow-panel backdrop-blur-sm;
+    @apply rounded-[26px] border border-white/[0.07] bg-[linear-gradient(180deg,rgba(255,255,255,0.028),rgba(255,255,255,0.016))] shadow-panel backdrop-blur-[10px];
   }
 
   .panel-strong {
-    @apply rounded-[32px] border border-white/10 bg-canvas-strong/90 shadow-panel backdrop-blur-sm;
+    @apply rounded-[30px] border border-white/[0.08] bg-[linear-gradient(180deg,rgba(18,26,39,0.96),rgba(12,18,28,0.92))] shadow-panel backdrop-blur-[12px];
   }
 
   .panel-label {
-    @apply font-mono text-[11px] uppercase tracking-[0.26em] text-muted/90;
+    @apply font-mono text-[10px] uppercase tracking-[0.22em] text-muted/85;
   }
 
   .grid-frame {
     background-size: 72px 72px;
     background-image:
-      linear-gradient(rgba(155, 168, 188, 0.07) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(155, 168, 188, 0.07) 1px, transparent 1px);
+      linear-gradient(rgba(155, 168, 188, 0.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(155, 168, 188, 0.045) 1px, transparent 1px);
   }
 
   .section-shell {

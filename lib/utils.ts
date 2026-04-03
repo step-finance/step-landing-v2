@@ -39,6 +39,23 @@ export function formatRelativeTime(iso: string) {
   return `${days}d ago`;
 }
 
+export function formatDurationApprox(seconds: number) {
+  const years = seconds / (60 * 60 * 24 * 365.25);
+
+  if (years >= 1) {
+    return `~${years.toFixed(1)} years`;
+  }
+
+  const months = seconds / (60 * 60 * 24 * 30.44);
+
+  if (months >= 1) {
+    return `~${months.toFixed(1)} months`;
+  }
+
+  const days = seconds / (60 * 60 * 24);
+  return `~${Math.max(1, Math.round(days))} days`;
+}
+
 export function formatDateTime(iso: string) {
   return new Intl.DateTimeFormat("en-US", {
     dateStyle: "medium",
