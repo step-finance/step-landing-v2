@@ -1,0 +1,72 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import "../styles/tokens.css";
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background:
+    var(--gradient-a),
+    var(--gradient-b),
+    linear-gradient(180deg, #04070c 0%, #060b12 28%, #08101a 100%);
+  color: rgb(var(--color-ink));
+  font-family: Manrope, "Avenir Next", "Segoe UI", sans-serif;
+  min-height: 100vh;
+}
+
+::selection {
+  background: rgba(0, 248, 183, 0.24);
+  color: rgb(var(--color-ink));
+}
+
+@layer base {
+  * {
+    @apply border-line;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    font-family: Space Grotesk, "Avenir Next", "Segoe UI", sans-serif;
+    letter-spacing: -0.03em;
+  }
+
+  p {
+    @apply text-muted;
+  }
+
+  a {
+    @apply transition-colors duration-200;
+  }
+}
+
+@layer components {
+  .panel {
+    @apply rounded-[28px] border border-line bg-canvas-elevated/80 shadow-panel backdrop-blur-sm;
+  }
+
+  .panel-strong {
+    @apply rounded-[32px] border border-white/10 bg-canvas-strong/90 shadow-panel backdrop-blur-sm;
+  }
+
+  .panel-label {
+    @apply font-mono text-[11px] uppercase tracking-[0.28em] text-muted;
+  }
+
+  .grid-frame {
+    background-size: 72px 72px;
+    background-image:
+      linear-gradient(rgba(155, 168, 188, 0.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(155, 168, 188, 0.07) 1px, transparent 1px);
+  }
+
+  .section-shell {
+    @apply relative overflow-hidden;
+  }
+}

@@ -1,0 +1,15 @@
+:root {
+  --color-canvas: 4 7 12;
+  --color-canvas-elevated: 11 17 26;
+  --color-canvas-strong: 16 24 38;
+  --color-ink: 245 247 251;
+  --color-muted: 155 168 188;
+  --color-line: 155 168 188;
+  --color-accent: 0 248 183;
+  --color-mint: 100 197 87;
+  --color-cyan: 17 138 178;
+  --color-amber: 255 187 29;
+  --color-orange: 243 114 44;
+  --gradient-a: radial-gradient(circle at top right, rgba(0, 248, 183, 0.18), transparent 40%);
+  --gradient-b: radial-gradient(circle at left center, rgba(17, 138, 178, 0.14), transparent 42%);
+}

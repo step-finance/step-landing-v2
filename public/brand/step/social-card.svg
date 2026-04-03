@@ -1,0 +1,34 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" fill="#04070C"/>
+  <circle cx="1026" cy="94" r="194" fill="url(#a)" opacity="0.24"/>
+  <circle cx="193" cy="562" r="226" fill="url(#b)" opacity="0.16"/>
+  <rect x="68" y="78" width="1064" height="474" rx="30" fill="rgba(11,17,26,0.82)" stroke="rgba(155,168,188,0.16)"/>
+  <text x="112" y="198" fill="#9BA8BC" font-family="IBM Plex Mono, monospace" font-size="22" letter-spacing="4">STEP VALIDATOR</text>
+  <text x="112" y="280" fill="#F5F7FB" font-family="Space Grotesk, Arial, sans-serif" font-size="64" font-weight="700">Stake with a validator built</text>
+  <text x="112" y="350" fill="#F5F7FB" font-family="Space Grotesk, Arial, sans-serif" font-size="64" font-weight="700">for Solana's next chapter.</text>
+  <text x="112" y="418" fill="#9BA8BC" font-family="Manrope, Arial, sans-serif" font-size="28">Premium validator infrastructure, live public metrics, and a clean path</text>
+  <text x="112" y="456" fill="#9BA8BC" font-family="Manrope, Arial, sans-serif" font-size="28">to future non-custodial staking.</text>
+  <g transform="translate(824 224) scale(0.3)">
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M812.603 674.913L812.59 325.107L509.358 150.02L509.371 499.964L206.219 674.974L509.464 850.038L812.412 675.146L812.603 675.257V675.035L812.71 674.974L812.603 674.913Z" fill="#64C557"/>
+    <path d="M206.312 325.088L509.544 150.001L509.531 500.151L206.299 675.238L206.312 325.088Z" fill="#118AB2"/>
+    <path d="M509.569 149.674L812.815 324.738L711.733 383.093L408.487 208.029L509.569 149.674Z" fill="#00F8B7"/>
+    <path d="M711.51 382.987L711.515 499.704L408.283 324.618L408.278 207.901L711.51 382.987Z" fill="#09BD8E"/>
+    <path d="M408.079 324.791L711.324 499.854L610.243 558.209L306.997 383.145L408.079 324.791Z" fill="#FFE3A3"/>
+    <path d="M611.446 558.815L611.45 675.531L308.218 500.445L308.213 383.728L611.446 558.815Z" fill="#FFBB1D"/>
+    <path d="M307.296 499.903L610.541 674.967L509.459 733.321L206.214 558.258L307.296 499.903Z" fill="#FF965E"/>
+    <path d="M509.237 733.22L509.241 849.937L206.009 674.85L206.005 558.134L509.237 733.22Z" fill="#D94C00"/>
+    <path d="M711.654 383.018L812.732 324.656L812.718 674.806L711.641 733.168L711.654 383.018Z" fill="#06D6A0"/>
+    <path d="M610.356 558.139L711.434 499.777L711.425 733.21L610.348 791.573L610.356 558.139Z" fill="#FFD166"/>
+    <path d="M509.066 733.252L610.144 674.89L610.139 791.607L509.062 849.969L509.066 733.252Z" fill="#F3722C"/>
+  </g>
+  <defs>
+    <radialGradient id="a" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1026 94) rotate(90) scale(194)">
+      <stop stop-color="#00F8B7"/>
+      <stop offset="1" stop-color="#00F8B7" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="b" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(193 562) rotate(90) scale(226)">
+      <stop stop-color="#118AB2"/>
+      <stop offset="1" stop-color="#118AB2" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+</svg>
