@@ -12,10 +12,17 @@ export function PerformanceComparison({
   label
 }: PerformanceComparisonProps) {
   const max = Math.max(validator, networkAverage);
+  const delta = validator - networkAverage;
 
   return (
     <div className="panel p-6">
       <p className="panel-label">{label}</p>
+      <div className="mt-3 flex items-end justify-between gap-4">
+        <div>
+          <p className="text-3xl font-semibold text-ink">{delta >= 0 ? "+" : ""}{delta.toFixed(2)} pts</p>
+          <p className="mt-2 text-sm leading-7">Current spread between Step and the network baseline.</p>
+        </div>
+      </div>
       <div className="mt-6 space-y-4">
         {[
           { key: "Step", value: validator, tone: "bg-accent" },

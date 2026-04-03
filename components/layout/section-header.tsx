@@ -15,9 +15,9 @@ export function SectionHeader({
 }: SectionHeaderProps) {
   return (
     <div className={cn("max-w-3xl", align === "center" && "mx-auto text-center")}>
-      {eyebrow ? <p className="panel-label mb-4">{eyebrow}</p> : null}
-      <h2 className="text-3xl font-semibold text-ink sm:text-4xl">{title}</h2>
-      {body ? <p className="mt-4 text-base leading-7 sm:text-lg">{body}</p> : null}
+      {eyebrow ? <p className="panel-label mb-3">{eyebrow}</p> : null}
+      <h2 className="text-[2rem] font-semibold leading-[1.06] text-ink sm:text-[2.5rem]">{title}</h2>
+      {body ? <p className="mt-3 max-w-2xl text-[15px] leading-7 sm:text-[17px]">{body}</p> : null}
     </div>
   );
 }

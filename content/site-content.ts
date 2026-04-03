@@ -23,13 +23,6 @@ export type FAQItem = {
   answer: string;
 };
 
-export type DocCard = {
-  href: string;
-  title: string;
-  body: string;
-  cta: string;
-};
-
 export type DisclosureItem = {
   title: string;
   body: string;
@@ -37,42 +30,42 @@ export type DisclosureItem = {
 
 export const heroCopy = {
   eyebrow: "STEP VALIDATOR",
-  title: "Stake with a validator built for Solana's next chapter.",
+  title: "Delegate SOL to Step.",
   body:
-    "Step now focuses on validator infrastructure, public performance data, and a cleaner path to non-custodial staking.",
+    "Live vote-account data, public validator identity, and a direct delegation path on Solana mainnet.",
   ctas: [
-    { href: "/validator", label: "Stake with Step" },
-    { href: "/metrics", label: "View Live Metrics", variant: "secondary" as const }
+    { href: "/validator", label: "Delegate to Step" },
+    { href: "/metrics", label: "View Step metrics", variant: "secondary" as const }
   ]
 };
 
 export const whyStakeItems: ValueProp[] = [
   {
-    title: "Public data over vague claims",
+    title: "Public vote account",
     body:
-      "Every headline metric is timestamped, source-aware, and paired with public explorer links.",
-    proof: "Freshness, source labels, and explorer verification built in.",
+      "Step shows its vote account, node identity, and explorer links before asking for delegation.",
+    proof: "Verify the validator first. Delegate second.",
     accent: "accent"
   },
   {
-    title: "Validator-first focus",
+    title: "Freshness stays visible",
     body:
-      "This site is intentionally narrow: one validator, one trust story, and one conversion path.",
-    proof: "No dependency on the old broken app or backend.",
+      "Update timing and delayed states stay on-screen, so the Step validator page never pretends stale data is live.",
+    proof: "Live, delayed, and fallback states are explicit.",
     accent: "mint"
   },
   {
-    title: "Built to degrade gracefully",
+    title: "Built around one validator",
     body:
-      "Static-first rendering and cached snapshots keep the site useful even when external data slows down.",
-    proof: "Last-known-good data and delayed-state handling are part of the UI.",
+      "This site is narrowly scoped to the Step validator, which keeps the surface simpler and easier to trust.",
+    proof: "No app relaunch. No extra platform layer.",
     accent: "cyan"
   },
   {
-    title: "Roadmap without custody risk",
+    title: "Non-custodial path",
     body:
-      "Direct staking can come later, but only as a non-custodial flow that respects wallet ownership.",
-    proof: "External delegation first, direct staking only when the surface is ready.",
+      "Delegation routes out today. Direct staking only ships if wallet control stays with the user.",
+    proof: "External now. Wallet-native later.",
     accent: "amber"
   }
 ];
@@ -80,51 +73,51 @@ export const whyStakeItems: ValueProp[] = [
 export const legacyMilestones: Milestone[] = [
   {
     year: "2021",
-    title: "Early Solana brand momentum",
+    title: "Early Solana brand",
     body:
-      "Step established itself as an early recognizable name in the Solana ecosystem."
+      "Step became an early recognizable name in Solana."
   },
   {
     year: "2023",
-    title: "Operational simplification",
+    title: "Surface area cut back",
     body:
-      "The focus shifted away from broad app surface area and toward what can be run reliably."
+      "The product narrowed toward what could be run cleanly."
   },
   {
     year: "Now",
-    title: "Validator-focused Step",
+    title: "Step validator era",
     body:
-      "The brand now centers on public validator infrastructure, trust, and future non-custodial staking."
+      "Step now centers on validator ops, public data, and future non-custodial staking."
   }
 ];
 
 export const roadmapPhases: RoadmapPhase[] = [
   {
     phase: "Phase 1",
-    title: "Marketing + external delegation",
+    title: "Validator site live",
     body:
-      "Live validator metrics, trusted links out, and staking guidance with no custody surface.",
+      "Live Step metrics, public validator data, and external delegation with no custody surface.",
     status: "current"
   },
   {
     phase: "Phase 2",
     title: "Wallet-aware guidance",
     body:
-      "Connect a wallet to see stake context and validator-prefilled guidance without transaction execution.",
+      "Show stake context and Step-prefilled guidance before on-site transactions exist.",
     status: "next"
   },
   {
     phase: "Phase 3",
     title: "Direct non-custodial staking",
     body:
-      "Transaction building and wallet signing on-site with transparent fees and clear risk boundaries.",
+      "Add direct delegation with wallet signing, clear fees, and explicit transaction status.",
     status: "later"
   },
   {
     phase: "Phase 4",
     title: "Stake management",
     body:
-      "Rewards visibility, stake account actions, and management tools for existing Step delegators.",
+      "Add stake-account views and rewards context for existing Step delegators.",
     status: "later"
   }
 ];
@@ -133,22 +126,22 @@ export const faqItems: FAQItem[] = [
   {
     question: "Is the old Step app back online?",
     answer:
-      "No. This website focuses on the Step validator, validator metrics, and future staking-related tooling. It does not restore the previous portfolio app."
+      "No. This site is for the Step validator, validator metrics, and future staking tooling. The old portfolio app is not being restored here."
   },
   {
     question: "Can I stake directly from this site today?",
     answer:
-      "Not yet. MVP uses clear external delegation paths and staking guides. Direct non-custodial staking is planned for a later phase."
+      "Not yet. Today the site routes delegation to external staking pages and shows the validator data needed to evaluate that step. Direct non-custodial staking is planned later."
   },
   {
     question: "Why show stale-state and source labels so prominently?",
     answer:
-      "Validator trust depends on data quality. If live sources slow down, the site should say so plainly instead of pretending everything is current."
+      "Because validator trust depends on current data. If a source slows down, the UI should say that plainly instead of acting live when it is not."
   },
   {
     question: "Does Step ever custody funds?",
     answer:
-      "No. The roadmap is explicitly non-custodial. Users keep control of their wallet and sign their own transactions."
+      "No. The roadmap is explicitly non-custodial. Users keep wallet control and sign their own transactions."
   }
 ];
 
@@ -156,46 +149,22 @@ export const securityChecklist: DisclosureItem[] = [
   {
     title: "Public validator identity",
     body:
-      "Vote account, identity, and explorer links are shown directly on the site to reduce ambiguity."
+      "Vote account, node identity, and explorer links are visible on the site so delegators can verify what they are using."
   },
   {
     title: "Minimal moving parts",
     body:
-      "The website is static-first and does not depend on the previous backend or a broad authenticated app surface."
+      "The site is static-first and avoids the old backend surface, broad auth flows, and unnecessary operational complexity."
   },
   {
     title: "Source-aware metrics",
     body:
-      "Displayed stats include update timestamps, freshness policy, and a methodology page for interpretation."
+      "Metrics carry update timestamps and source context so performance data reads like infrastructure, not promotion."
   },
   {
     title: "Non-custodial roadmap",
     body:
-      "Future staking flows are intended to use user wallets for signing rather than introducing custody risk."
-  }
-];
-
-export const docsCards: DocCard[] = [
-  {
-    href: "/docs/how-to-stake",
-    title: "How to stake with Step",
-    body:
-      "A practical guide to external delegation in MVP and what to expect before direct staking exists.",
-    cta: "Read the guide"
-  },
-  {
-    href: "/docs/rewards-and-risks",
-    title: "Rewards and risks",
-    body:
-      "Understand commission, rewards timing, activation delays, and why APY is always an estimate.",
-    cta: "Understand staking"
-  },
-  {
-    href: "/docs/metrics-methodology",
-    title: "Metrics methodology",
-    body:
-      "See where validator data comes from, how often it refreshes, and when the UI marks data as delayed.",
-    cta: "Review methodology"
+      "Any future staking flow should keep signing in the user wallet rather than introducing custody risk."
   }
 ];
 

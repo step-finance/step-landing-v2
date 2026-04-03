@@ -8,8 +8,6 @@ export const siteConfig = {
     { href: "/", label: "Home" },
     { href: "/validator", label: "Validator" },
     { href: "/metrics", label: "Metrics" },
-    { href: "/docs", label: "Docs" },
-    { href: "/security", label: "Security" },
     { href: "/about", label: "About" }
   ],
   socials: [

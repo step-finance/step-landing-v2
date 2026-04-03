@@ -16,24 +16,24 @@ type SiteHeaderProps = {
 export function SiteHeader({ items, liveStatus }: SiteHeaderProps) {
   return (
     <header className="sticky top-0 z-40 px-4 pt-4 sm:px-6 lg:px-8">
-      <div className="mx-auto flex max-w-[1400px] items-center justify-between rounded-full border border-line bg-canvas-strong/70 px-5 py-3 shadow-panel backdrop-blur-md">
+      <div className="mx-auto flex max-w-[1400px] items-center justify-between rounded-full border border-line/80 bg-canvas-strong/78 px-4 py-3 shadow-panel backdrop-blur-md sm:px-5">
         <BrandLogo />
-        <nav className="hidden items-center gap-1 lg:flex">
+        <nav className="hidden items-center gap-1 lg:flex" aria-label="Primary">
           {items.map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className="rounded-full px-4 py-2 text-sm text-muted hover:bg-white/5 hover:text-ink"
+              className="rounded-full px-3 py-2 text-sm text-muted hover:bg-white/[0.05] hover:text-ink"
             >
               {item.label}
             </Link>
           ))}
         </nav>
         <div className="hidden items-center gap-3 lg:flex">
-          <div className="inline-flex items-center gap-2 rounded-full border border-line bg-white/5 px-3 py-2 text-xs text-muted">
+          <div className="inline-flex items-center gap-2 rounded-full border border-line bg-white/[0.04] px-3 py-2 text-[11px] uppercase tracking-[0.2em] text-muted">
             <span
               className={cn(
-                "h-2.5 w-2.5 rounded-full",
+                "h-2 w-2 rounded-full",
                 liveStatus.status === "healthy" && "bg-accent animate-pulse-soft",
                 liveStatus.status === "degraded" && "bg-amber",
                 liveStatus.status === "stale" && "bg-orange"
@@ -41,7 +41,7 @@ export function SiteHeader({ items, liveStatus }: SiteHeaderProps) {
             />
             <span>{liveStatus.label}</span>
           </div>
-          <ButtonLink href="/validator">Stake with Step</ButtonLink>
+          <ButtonLink href="/validator">Delegate to Step</ButtonLink>
         </div>
         <MobileNavSheet items={items} />
       </div>

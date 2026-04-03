@@ -27,8 +27,8 @@ export default async function MetricsPage() {
           <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
             <SectionHeader
               eyebrow="METRICS TERMINAL"
-              title="A dashboard-first layer for serious validator comparison."
-              body="This page favors fresh data, trend context, and methodology links over generic conversion fluff."
+              title="A validator dashboard, not a decorative chart page."
+              body="Use this view to read stake trend, reward context, freshness, and current spread versus the network baseline."
             />
             <DataFreshnessBadge
               updatedAt={snapshot.meta.updatedAt}
@@ -43,16 +43,48 @@ export default async function MetricsPage() {
           <ChartPanel
             meta="STAKE TREND"
             title="Delegated stake trend"
-            body="Stake movement is one of the clearest signals of validator momentum, trust, and consistency."
+            body="Stake movement is one of the clearest live signals of validator trust and consistency."
           >
-            <LineChart points={snapshot.history.stake} color="#00F8B7" />
+            <div className="flex h-full flex-col">
+              <div className="grid gap-3 sm:grid-cols-3">
+                {[
+                  { label: "Window", value: "30D" },
+                  { label: "Current stake", value: `${formatCompact(snapshot.validator.activatedStakeSol)} SOL` },
+                  { label: "Updated", value: snapshot.meta.updatedAt ? "Live snapshot" : "Cached" }
+                ].map((item) => (
+                  <div key={item.label} className="rounded-[20px] border border-line bg-white/[0.03] p-3">
+                    <p className="panel-label">{item.label}</p>
+                    <p className="mt-2 font-mono text-sm text-ink">{item.value}</p>
+                  </div>
+                ))}
+              </div>
+              <div className="mt-5 h-full">
+                <LineChart points={snapshot.history.stake} color="#00F8B7" />
+              </div>
+            </div>
           </ChartPanel>
           <ChartPanel
             meta="REWARDS TREND"
             title="Recent epoch rewards"
-            body="Rewards should be framed as recent outcomes with clear caveats, not as a guaranteed outcome."
+            body="Rewards belong here as recent outcomes, with caveats, not as a guarantee."
           >
-            <LineChart points={snapshot.history.rewards} color="#118AB2" />
+            <div className="flex h-full flex-col">
+              <div className="grid gap-3 sm:grid-cols-3">
+                {[
+                  { label: "Epoch signal", value: `${formatCompact(snapshot.validator.recentEpochRewardsSol, 2)} SOL` },
+                  { label: "Est. APY", value: formatPercent(snapshot.validator.apyEstimate) },
+                  { label: "Method", value: "Snapshot + trend" }
+                ].map((item) => (
+                  <div key={item.label} className="rounded-[20px] border border-line bg-white/[0.03] p-3">
+                    <p className="panel-label">{item.label}</p>
+                    <p className="mt-2 font-mono text-sm text-ink">{item.value}</p>
+                  </div>
+                ))}
+              </div>
+              <div className="mt-5 h-full">
+                <LineChart points={snapshot.history.rewards} color="#118AB2" />
+              </div>
+            </div>
           </ChartPanel>
         </div>
       </PageSection>

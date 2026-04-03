@@ -9,7 +9,7 @@ import { StickyStakeBar } from "@/components/metrics/sticky-stake-bar";
 import { ValidatorIdentityCard } from "@/components/metrics/validator-identity-card";
 import { DataSourceDisclosure } from "@/components/trust/data-source-disclosure";
 import { getValidatorSnapshot } from "@/lib/validator/queries";
-import { formatCompact, formatPercent } from "@/lib/utils";
+import { formatCompact, formatPercent, formatRelativeTime } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "Validator"
@@ -29,6 +29,7 @@ export default async function ValidatorPage() {
           identityPubkey={snapshot.validator.identityPubkey}
           commission={formatPercent(snapshot.validator.commission)}
           healthLabel={snapshot.validator.health}
+          lastVoteLabel={formatRelativeTime(snapshot.validator.lastVoteAt)}
           externalStakeUrl={snapshot.validator.externalStakeUrl}
           explorerUrls={snapshot.validator.explorerUrls}
         />
@@ -39,7 +40,7 @@ export default async function ValidatorPage() {
           <MetricCard
             label="Activated stake"
             value={`${formatCompact(snapshot.validator.activatedStakeSol)} SOL`}
-            footnote="Operational scale and social proof"
+            footnote="Current activated stake"
           />
           <MetricCard
             label="Est. APY"
@@ -49,17 +50,17 @@ export default async function ValidatorPage() {
           <MetricCard
             label="Performance vs network"
             value={`${snapshot.validator.performanceVsNetworkPct.toFixed(2)} pts`}
-            footnote="Current comparison context"
+            footnote="Spread versus network baseline"
           />
           <MetricCard
             label="Recent epoch rewards"
             value={`${formatCompact(snapshot.validator.recentEpochRewardsSol, 2)} SOL`}
-            footnote="Recent realized reward context"
+            footnote="Recent realized reward signal"
           />
           <MetricCard
             label="Stake rank"
             value={`#${snapshot.validator.stakeRank}`}
-            footnote="Quick validator comparison cue"
+            footnote="Current rank by activated stake"
           />
           <MetricCard
             label="Explorer path"
@@ -74,8 +75,8 @@ export default async function ValidatorPage() {
         <div className="grid gap-8 xl:grid-cols-[0.9fr,1.1fr]">
           <SectionHeader
             eyebrow="TRANSPARENCY"
-            title="Identity, freshness, and source clarity are part of the conversion path."
-            body="This page is intentionally simple: show who the validator is, show how it is performing, and route delegation cleanly."
+            title="Identity, freshness, and source clarity belong in the staking path."
+            body="This page stays narrow on purpose: show the validator, show current performance, and route delegation cleanly."
           />
           <DataSourceDisclosure sources={snapshot.sources} />
         </div>
@@ -85,14 +86,14 @@ export default async function ValidatorPage() {
         <div className="grid gap-8 xl:grid-cols-[0.85fr,1.15fr]">
           <SectionHeader
             eyebrow="QUESTIONS"
-            title="MVP keeps the staking promise narrow."
-            body="Today this page helps users evaluate and delegate to Step through trusted external paths. Native wallet flows can come later."
+            title="The staking promise stays narrow in MVP."
+            body="Today this page helps users evaluate the validator and delegate through external staking paths. Wallet-native flows come later."
           />
           <FAQAccordion items={faqItems.slice(0, 3)} />
         </div>
         <StickyStakeBar
           href={snapshot.validator.externalStakeUrl}
-          statusLabel="MVP uses external delegation links while the direct non-custodial flow is still being prepared."
+          statusLabel="Current flow: evaluate Step here, then open an external delegation page."
         />
       </PageSection>
     </>

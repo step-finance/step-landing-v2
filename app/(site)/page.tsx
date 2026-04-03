@@ -14,10 +14,11 @@ import { SnapshotGrid } from "@/components/marketing/snapshot-grid";
 import { WhyStakeGrid } from "@/components/marketing/why-stake-grid";
 import { ChartPanel } from "@/components/metrics/chart-panel";
 import { PerformanceComparison } from "@/components/metrics/performance-comparison";
+import { DataFreshnessBadge } from "@/components/trust/data-freshness-badge";
 import { DataSourceDisclosure } from "@/components/trust/data-source-disclosure";
 import { SecurityChecklist } from "@/components/trust/security-checklist";
 import { getValidatorSnapshot } from "@/lib/validator/queries";
-import { formatCompact, formatDateTime, formatPercent } from "@/lib/utils";
+import { formatAddress, formatCompact, formatDateTime, formatPercent, formatRelativeTime } from "@/lib/utils";
 
 export const revalidate = 60;
 
@@ -34,34 +35,40 @@ export default async function HomePage() {
         />
       </PageSection>
 
-      <PageSection id="snapshot">
-        <div className="flex flex-col gap-8">
-          <SectionHeader
-            eyebrow="LIVE SNAPSHOT"
-            title="Validator proof in the first scroll."
-            body="The product is the validator. The website earns trust by surfacing public performance, freshness, and identity immediately."
-          />
+      <PageSection id="snapshot" tone="frame" className="pt-4">
+        <div className="space-y-6">
+          <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+            <SectionHeader
+              eyebrow="VALIDATOR PROOF"
+              title="The Step validator, in one screen."
+              body="Stake, rank, vote activity, and public identity belong in the first scroll."
+            />
+            <DataFreshnessBadge
+              updatedAt={snapshot.meta.updatedAt}
+              state={snapshot.meta.freshnessState}
+            />
+          </div>
           <SnapshotGrid
             items={[
               {
-                label: "Activated stake",
+                label: "Step activated stake",
                 value: `${formatCompact(snapshot.validator.activatedStakeSol)} SOL`,
-                footnote: `Updated ${formatDateTime(snapshot.meta.updatedAt)}`
+                footnote: `Snapshot ${formatDateTime(snapshot.meta.updatedAt)}`
               },
               {
-                label: "Stake rank",
+                label: "Step rank",
                 value: `#${snapshot.validator.stakeRank}`,
-                footnote: "Comparison-oriented shorthand for validator shoppers"
+                footnote: "Current validator position"
               },
               {
-                label: "Last vote",
-                value: `${snapshot.validator.lastVoteSlot}`,
-                footnote: "Public liveness signal"
+                label: "Last vote age",
+                value: formatRelativeTime(snapshot.validator.lastVoteAt),
+                footnote: `${snapshot.validator.lastVoteSlot}`
               },
               {
-                label: "Vote account",
-                value: `${snapshot.validator.voteAccount.slice(0, 4)}...${snapshot.validator.voteAccount.slice(-4)}`,
-                footnote: "Open explorer",
+                label: "Step vote account",
+                value: formatAddress(snapshot.validator.voteAccount, 6, 6),
+                footnote: "Open vote account",
                 href: snapshot.validator.explorerUrls.explorer
               }
             ]}
@@ -69,46 +76,68 @@ export default async function HomePage() {
         </div>
       </PageSection>
 
-      <PageSection tone="frame">
-        <div className="grid gap-6 xl:grid-cols-[1.15fr,0.85fr]">
+      <PageSection className="pt-4">
+        <div className="grid gap-6 xl:grid-cols-[1.2fr,0.8fr]">
           <ChartPanel
-            meta="METRICS TEASER"
-            title="Live metrics, not marketing theater."
-            body="The dashboard surface is intentionally part terminal, part product proof. Users should see trend context before they read a long story."
+            meta="METRICS TERMINAL"
+            title="Step metrics, not landing-page theater."
+            body="Recent stake movement, reward context, and validator timing should read like operating data."
           >
             <div className="flex h-full flex-col justify-between">
-              <div className="grid gap-3 sm:grid-cols-3">
+              <div className="grid gap-3 sm:grid-cols-4">
                 {[
-                  { label: "Stake trend", value: `${formatCompact(snapshot.validator.activatedStakeSol)} SOL` },
-                  { label: "Epoch rewards", value: `${formatCompact(snapshot.validator.recentEpochRewardsSol, 2)} SOL` },
-                  { label: "Perf. vs avg", value: `${snapshot.validator.performanceVsNetworkPct.toFixed(2)} pts` }
+                  { label: "Trend window", value: "30D" },
+                  { label: "Step epoch rewards", value: `${formatCompact(snapshot.validator.recentEpochRewardsSol, 2)} SOL` },
+                  { label: "Step vs network", value: `${snapshot.validator.performanceVsNetworkPct.toFixed(2)} pts` },
+                  { label: "Snapshot age", value: formatRelativeTime(snapshot.meta.updatedAt) }
                 ].map((item) => (
                   <div key={item.label} className="rounded-[20px] border border-line bg-white/[0.03] p-4">
                     <p className="panel-label">{item.label}</p>
-                    <p className="mt-3 font-mono text-lg text-ink">{item.value}</p>
+                    <p className="mt-3 font-mono text-base text-ink sm:text-lg">{item.value}</p>
                   </div>
                 ))}
               </div>
-              <div className="mt-6 h-40 rounded-[24px] border border-line bg-canvas/70 p-3">
+              <div className="mt-5 h-44 rounded-[24px] border border-line bg-canvas/70 p-3">
                 <LineChart points={snapshot.history.stake} color="#00F8B7" />
+              </div>
+              <div className="mt-3 flex items-center justify-between text-xs uppercase tracking-[0.2em] text-muted">
+                <span>{snapshot.history.stake[0]?.label ?? "Start"}</span>
+                <span>Step activated stake</span>
+                <span>{snapshot.history.stake.at(-1)?.label ?? "Now"}</span>
               </div>
             </div>
           </ChartPanel>
-          <div className="space-y-6">
+          <div className="space-y-4">
             <PerformanceComparison
               validator={snapshot.comparison.step}
               networkAverage={snapshot.comparison.networkAverage}
               label={snapshot.comparison.label}
             />
             <div className="panel p-6">
-              <p className="panel-label">Metrics path</p>
-              <h3 className="mt-3 text-2xl font-semibold text-ink">Ready for comparison-driven users</h3>
-              <p className="mt-4 text-sm leading-7">
-                The validator page should convert. The metrics page should satisfy skeptical stakers
-                who want current data and methodology.
-              </p>
-              <ButtonLink href="/metrics" className="mt-6">
-                View Live Metrics
+              <p className="panel-label">STEP DETAILS</p>
+              <div className="mt-5 space-y-4">
+                {[
+                  {
+                    label: "Step vote account",
+                    value: formatAddress(snapshot.validator.voteAccount, 8, 8)
+                  },
+                  {
+                    label: "Step node identity",
+                    value: formatAddress(snapshot.validator.identityPubkey, 8, 8)
+                  },
+                  {
+                    label: "Step commission",
+                    value: formatPercent(snapshot.validator.commission)
+                  }
+                ].map((item) => (
+                  <div key={item.label} className="flex items-center justify-between gap-4 border-b border-white/10 pb-3 last:border-none last:pb-0">
+                    <span className="text-sm text-muted">{item.label}</span>
+                    <span className="font-mono text-sm text-ink">{item.value}</span>
+                  </div>
+                ))}
+              </div>
+              <ButtonLink href="/metrics" className="mt-6 w-full">
+                Open Step metrics
               </ButtonLink>
             </div>
           </div>
@@ -118,20 +147,20 @@ export default async function HomePage() {
       <PageSection>
         <SectionHeader
           eyebrow="WHY STEP"
-          title="Why delegators should care."
-          body="This is a validator-first brand, so the value proposition needs to be simple, measurable, and credible."
+          title="Why delegate to Step."
+          body="Keep the case narrow: public validator identity, explicit freshness, simpler operations, and a non-custodial staking path."
         />
         <div className="mt-8">
           <WhyStakeGrid items={whyStakeItems} />
         </div>
       </PageSection>
 
-      <PageSection tone="elevated">
-        <div className="grid gap-8 xl:grid-cols-[0.85fr,1.15fr]">
+      <PageSection tone="elevated" className="py-8 lg:py-10">
+        <div className="grid gap-6 xl:grid-cols-[0.72fr,1.28fr]">
           <SectionHeader
             eyebrow="STEP STORY"
-            title="An early Solana brand, now narrowed to validator infrastructure."
-            body="Step's past matters as context, not as the main product. This section should add credibility without making the site feel like a memorial."
+            title="Step, narrowed to validator work."
+            body="The history still matters. The validator comes first."
           />
           <LegacyTimeline items={legacyMilestones} />
         </div>
@@ -142,8 +171,8 @@ export default async function HomePage() {
           <div>
             <SectionHeader
               eyebrow="PUBLIC BY DEFAULT"
-              title="Trust comes from visibility."
-              body="Validator identity, freshness, public links, and narrow product scope should all be obvious without reading a whitepaper."
+              title="Validator trust should be inspectable."
+              body="Identity, freshness, source handling, and product scope should read clearly on the landing page."
             />
             <div className="mt-8">
               <SecurityChecklist items={securityChecklist} />
@@ -152,20 +181,24 @@ export default async function HomePage() {
           <div className="space-y-6">
             <DataSourceDisclosure sources={snapshot.sources} />
             <div className="panel p-6">
-              <p className="panel-label">Scope clarity</p>
+              <p className="panel-label">WHAT THIS SITE IS</p>
               <p className="mt-4 text-base leading-7 text-ink">
-                This site focuses on the Step validator and validator-related tooling. It does not
-                restore the previous Step portfolio app.
+                This is the Step validator site: live data, public accounts, and delegation paths.
+                It is not a relaunch of the old portfolio app.
               </p>
               <div className="mt-6 flex flex-wrap gap-3">
-                <ButtonLink href="/security" variant="secondary">
-                  View Security
+                <ButtonLink
+                  href={snapshot.validator.explorerUrls.explorer}
+                  external
+                  variant="secondary"
+                >
+                  Open vote account
                 </ButtonLink>
                 <Link
                   href="/status"
                   className="inline-flex items-center gap-2 text-sm font-medium text-accent hover:text-[#5fffd3]"
                 >
-                  View Status
+                  View ops status
                   <ArrowUpRight className="h-4 w-4" />
                 </Link>
               </div>
@@ -177,21 +210,21 @@ export default async function HomePage() {
       <PageSection tone="frame">
         <SectionHeader
           eyebrow="ROADMAP"
-          title="Direct non-custodial staking is the next layer, not the first dependency."
-          body="The roadmap is staged on purpose: credibility first, wallet awareness second, and direct staking only when the UX and security model are ready."
+          title="Step staking UX comes in stages."
+          body="First keep the validator clear. Then add wallet-aware guidance. Then add direct non-custodial staking."
         />
-        <div className="mt-8">
+        <div className="mt-6">
           <RoadmapRail phases={roadmapPhases} />
         </div>
       </PageSection>
 
-      <PageSection>
+      <PageSection className="pt-6">
         <div className="grid gap-8 xl:grid-cols-[0.9fr,1.1fr]">
           <div>
             <SectionHeader
               eyebrow="FAQ"
-              title="Clear about what exists now."
-              body="The site should never accidentally imply that the old product has returned or that native staking is already live."
+              title="What the Step site supports today."
+              body="Step validator data and delegation are live here. Native staking UX is not."
             />
           </div>
           <FAQAccordion items={faqItems} />

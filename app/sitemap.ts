@@ -8,12 +8,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/validator",
     "/metrics",
     "/about",
-    "/security",
     "/faq",
-    "/docs",
-    "/docs/how-to-stake",
-    "/docs/rewards-and-risks",
-    "/docs/metrics-methodology",
     "/status",
     "/legal/privacy",
     "/legal/terms"

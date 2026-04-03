@@ -1,30 +1,21 @@
-import Link from "next/link";
-
 import type { ValidatorSource } from "@/lib/validator/schema";
 import { formatRelativeTime } from "@/lib/utils";
 
 type DataSourceDisclosureProps = {
   sources: ValidatorSource[];
-  methodologyHref?: string;
 };
 
-export function DataSourceDisclosure({
-  sources,
-  methodologyHref = "/docs/metrics-methodology"
-}: DataSourceDisclosureProps) {
+export function DataSourceDisclosure({ sources }: DataSourceDisclosureProps) {
   return (
     <div className="panel p-6">
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+      <div>
         <div>
           <p className="panel-label">Sources</p>
           <p className="mt-3 max-w-xl text-sm leading-7">
-            Metrics are normalized on the server so the UI can stay fast, static-first, and clear
-            about freshness.
+            Validator metrics are normalized on the server so the site stays fast and explicit about
+            freshness.
           </p>
         </div>
-        <Link href={methodologyHref} className="text-sm font-medium text-accent hover:text-[#5fffd3]">
-          Read methodology
-        </Link>
       </div>
       <div className="mt-6 grid gap-3 md:grid-cols-2">
         {sources.map((source) => (

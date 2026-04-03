@@ -21,12 +21,12 @@ export default async function FAQPage() {
           <SectionHeader
             eyebrow="FAQ"
             title="Clear answers for new stakers, former users, and validator shoppers."
-            body="This section should reduce confusion, especially around the difference between the old Step product and the validator-first site."
+            body="This page answers the core questions without sending users into extra docs."
           />
           <div className="mt-6 flex flex-wrap gap-3">
-            <ButtonLink href="/docs/how-to-stake">Read Staking Guide</ButtonLink>
-            <ButtonLink href="/validator" variant="secondary">
-              View Validator
+            <ButtonLink href="/validator">View Validator</ButtonLink>
+            <ButtonLink href="/metrics" variant="secondary">
+              View Metrics
             </ButtonLink>
           </div>
         </div>

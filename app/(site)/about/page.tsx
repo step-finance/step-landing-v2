@@ -31,8 +31,8 @@ export default async function AboutPage() {
             <div className="panel p-6">
               <p className="panel-label">What this site is</p>
               <p className="mt-4 text-base leading-7 text-ink">
-                A public home for the Step validator, validator metrics, trust surfaces, and a
-                roadmap toward direct non-custodial staking.
+                A public home for the Step validator, validator metrics, and a clean delegation
+                path with non-custodial staking planned later.
               </p>
             </div>
             <div className="panel p-6">
@@ -44,8 +44,8 @@ export default async function AboutPage() {
             </div>
             <div className="flex flex-wrap gap-3">
               <ButtonLink href="/validator">View Validator</ButtonLink>
-              <ButtonLink href="/security" variant="secondary">
-                Read Security
+              <ButtonLink href="/metrics" variant="secondary">
+                View Metrics
               </ButtonLink>
             </div>
           </div>
