@@ -10,12 +10,19 @@ import { ButtonLink } from "@/components/layout/button-link";
 import { PageSection } from "@/components/layout/page-section";
 import { SectionHeader } from "@/components/layout/section-header";
 import { LegacyTimeline } from "@/components/marketing/legacy-timeline";
+import { getAbsoluteUrl } from "@/lib/site-config";
 import { getValidatorConfig } from "@/lib/validator/config";
 
 export const metadata: Metadata = {
-  title: "Contributions | Step Validator",
+  title: "Contributions",
   description:
-    "Step's history across Solana products, analytics, media, events, and education since early 2021."
+    "Step's history across Solana products, analytics, media, events, education, and RWA work since early 2021.",
+  alternates: {
+    canonical: getAbsoluteUrl("/contributions")
+  },
+  openGraph: {
+    url: getAbsoluteUrl("/contributions")
+  }
 };
 
 export default function ContributionsPage() {

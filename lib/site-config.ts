@@ -1,8 +1,14 @@
 export const siteConfig = {
   name: "Step Validator",
+  shortName: "Step",
+  organizationName: "Step Finance",
+  shareTitle: "Stake With the Step Validator on Solana",
   description:
-    "Step validator on Solana with public data and delegation links.",
+    "Live validator performance, direct delegation, and Step's contributions across the Solana ecosystem.",
   domain: process.env.NEXT_PUBLIC_SITE_URL ?? "https://step.finance",
+  themeColor: "#04070C",
+  icon: "/brand/step/favicon.svg",
+  ogImage: "/brand/step/social-card.svg",
   network: "Solana Mainnet",
   nav: [
     { href: "/#top", label: "Home" },

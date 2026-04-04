@@ -1,12 +1,28 @@
+import type { Metadata } from "next";
+
 import { contributionPreview, faqItems, heroCopy } from "@/content/site-content";
 import { ButtonLink } from "@/components/layout/button-link";
 import { PageSection } from "@/components/layout/page-section";
 import { SectionHeader } from "@/components/layout/section-header";
 import { FAQAccordion } from "@/components/marketing/faq-accordion";
 import { HeroTerminal } from "@/components/marketing/hero-terminal";
+import { getAbsoluteUrl, siteConfig } from "@/lib/site-config";
 import { getValidatorSnapshot } from "@/lib/validator/queries";
 
 export const revalidate = 60;
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: getAbsoluteUrl("/")
+  },
+  openGraph: {
+    url: getAbsoluteUrl("/")
+  },
+  twitter: {
+    title: siteConfig.shareTitle,
+    description: siteConfig.description
+  }
+};
 
 export default async function HomePage() {
   const snapshot = await getValidatorSnapshot();
