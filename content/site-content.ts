@@ -210,7 +210,7 @@ export const faqItems: FAQItem[] = [
   {
     question: "Where does the live validator data come from?",
     answer:
-      "The live metrics come from free public Solana RPC. If the source is unavailable, the page marks the live data unavailable."
+      "Core validator data comes from free public Solana RPC, with APY and performance fields also pulled from public StakeWiz and Jito endpoints. If a source is unavailable, the affected fields are marked unavailable instead of estimated."
   },
   {
     question: "Why is the site so much simpler now?",
