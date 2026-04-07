@@ -13,7 +13,7 @@ type StakewizValidatorResponse = {
 export async function getStakewizValidatorData(): Promise<StakewizValidatorData | null> {
   const { voteAccount } = getValidatorConfig();
   const response = await fetch(`https://api.stakewiz.com/validator/${voteAccount}`, {
-    next: { revalidate: 300 }
+    next: { revalidate: 60 }
   });
 
   if (!response.ok) {

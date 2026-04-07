@@ -10,7 +10,14 @@ export function formatNumber(value: number, options?: Intl.NumberFormatOptions) 
 }
 
 export function formatPercent(value: number, digits = 2) {
-  return `${value.toFixed(digits)}%`;
+  const rounded = Number(value.toFixed(digits));
+
+  if (value < 100 && rounded >= 100) {
+    const maxWithoutRoundingToHundred = 100 - 1 / 10 ** digits;
+    return `${maxWithoutRoundingToHundred.toFixed(digits)}%`;
+  }
+
+  return `${rounded.toFixed(digits)}%`;
 }
 
 export function formatCompact(value: number, digits = 1) {
