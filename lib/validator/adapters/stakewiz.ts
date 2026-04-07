@@ -4,6 +4,7 @@ import type { StakewizValidatorData } from "@/lib/validator/schema";
 type StakewizValidatorResponse = {
   apy_estimate?: number | null;
   skip_rate?: number | null;
+  credit_ratio?: number | null;
   vote_success?: number | null;
   uptime?: number | null;
   updated_at?: string | null;
@@ -24,7 +25,7 @@ export async function getStakewizValidatorData(): Promise<StakewizValidatorData 
   return {
     estimatedApy: data.apy_estimate ?? null,
     skipRate: data.skip_rate ?? null,
-    votingRate: data.vote_success ?? null,
+    votingRate: data.credit_ratio ?? data.vote_success ?? null,
     uptime30d: data.uptime ?? null,
     updatedAt: data.updated_at ?? null
   };

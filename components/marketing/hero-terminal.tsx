@@ -194,7 +194,7 @@ export function HeroTerminal({
                         ? "warning"
                         : "critical"
                 }
-                footnote="StakeWiz vote success"
+                footnote="StakeWiz voting rate"
               />
               <PerformanceGaugeCard
                 label="Uptime (30d)"
