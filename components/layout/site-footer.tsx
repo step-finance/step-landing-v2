@@ -20,7 +20,7 @@ export function SiteFooter({ explorerLinks, externalStakeUrl }: SiteFooterProps)
           <div className="max-w-lg">
             <BrandLogo className="text-white/90" />
             <p className="mt-4 max-w-md text-sm leading-7">
-              Step validator on Solana with public data and delegation links.
+              A long-running Solana validator backed by Step's work across the ecosystem since early 2021.
             </p>
             <div className="mt-5 flex flex-wrap gap-3">
               <Link

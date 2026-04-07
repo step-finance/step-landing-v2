@@ -27,7 +27,7 @@ export function getValidatorConfig() {
     name: process.env.STEP_VALIDATOR_NAME ?? DEFAULT_VALIDATOR_NAME,
     network: "Solana Mainnet",
     tagline:
-      "Step validator on Solana with public data and delegation links.",
+      "A long-running Solana validator backed by Step's work across the ecosystem since early 2021.",
     voteAccount,
     identityPubkey,
     firstStakeEpoch: Number(process.env.STEP_FIRST_STAKE_EPOCH ?? DEFAULT_FIRST_STAKE_EPOCH),
